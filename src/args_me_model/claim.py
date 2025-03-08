@@ -65,6 +65,13 @@ class Claim(BaseModel):
 
     @staticmethod
     def read_ndjson(file_name: FilePath) -> Iterator['Claim']:
+        """
+        Read claims from a Newline Delimited JSON file.
+
+        :param str file_name: The name of the file to read
+        :return: an iterator over the claims in the file
+        :rtype: iterator[Claim]
+        """
         with open(file_name) as file:
             for line in file:
                 trimmed_line = line.strip()
@@ -76,6 +83,14 @@ class Claim(BaseModel):
             claims: Iterator['Claim'],
             file_name: str,
             mode: Annotated[str, Field(pattern=r"[awx]")]="w"):
+        """
+        Read claims from a Newline Delimited JSON file.
+
+        :param iterator[Claim] claims: An iterator over the claims to write
+        :param str file_name: The name of the file to write to
+        :param str mode: The mode for writing to the file ("a" for appending),
+        defaults to "w"
+        """
         with open(file_name, mode=mode) as file:
             for claim in claims:
                 file.write(claim.model_dump_json())
