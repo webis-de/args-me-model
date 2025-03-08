@@ -1,6 +1,6 @@
-from .argument import Argument
 from .claim import Claim
 from .source import Source
+from .support import Support
 
-__all__ = ['Argument', 'Claim', 'Source']
+__all__ = ['Claim', 'Source', 'Support']
 __version__ = "0.1.0"
