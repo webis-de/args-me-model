@@ -54,7 +54,7 @@ class TestParsing(unittest.TestCase):
         claim = Claim(
             id="S0000C0000000000000000",
             text="Example text of the claim",
-            sources = [source]
+            sources=[source]
           )
         with open("tests/example-minimal.json") as f:
             self.assertEqual(claim, Claim.model_validate_json(f.read()))
@@ -64,7 +64,7 @@ class TestParsing(unittest.TestCase):
         claim = Claim(
             id="S0000C0000000000000000",
             text="Example text of the claim",
-            sources = [source]
+            sources=[source]
           )
         parsed = list(Claim.read_ndjson("tests/example-minimal.ndjson"))
         self.assertEqual(2, len(parsed))

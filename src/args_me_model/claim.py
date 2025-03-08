@@ -35,7 +35,7 @@ class Claim(BaseModel):
             if not source.text:
                 raise ValueError("Sources for a claim must contain the 'text' attribute")
         return self
-    
+
     @classmethod
     def from_source(
             cls,
@@ -62,7 +62,7 @@ class Claim(BaseModel):
                     ) for support in supports],
                 sources=[source]
             )
-    
+
     @staticmethod
     def read_ndjson(file_name: FilePath) -> Iterator['Claim']:
         with open(file_name) as file:

@@ -10,7 +10,9 @@ claim_id_pattern = r"S[0-9a-z]{4}C[0-9a-f]{16}$"
 def _str_hash(string: str, length: int) -> str:
     return hashlib.sha1(string.encode("utf-8")).hexdigest()[0:length]
 
+
 _hash_cache = {}
+
 
 def hash_claim_id(source_name: str, text: str) -> str:
     """
