@@ -20,7 +20,7 @@ class Claim(BaseModel):
             default=None,
             description="ID of the counter claim to this claim",
         )
-    supports: List[Support] = Field(
+    support: List[Support] = Field(
             default=[],
             description="Other claims that support this claim as an argument"
         )
@@ -40,15 +40,15 @@ class Claim(BaseModel):
     def from_source(
             cls,
             source: Source,
-            supports: List[List['Claim']] = []) -> 'Claim':
+            support: List[List['Claim']] = []) -> 'Claim':
         """
         Derive a claim object directly from the source, copying its text.
 
         :param cls: the class object
         :param Source source: the source object from which the claim should be derived
-        :param supports: a list of linked supports from the same source; each list of
+        :param support: a list of linked supports from the same source; each list of
         claims within the list corresponds to one linked support relation
-        :type supports: list[list[Claim]]
+        :type support: list[list[Claim]]
         :return: the claim object directly derived from the source
         :rtype: Claim
         :raises ValueError: if the source contains no 'text'
@@ -56,10 +56,10 @@ class Claim(BaseModel):
         return cls(
                 id=hash_claim_id(source.name, source.text),
                 text=source.text,
-                supports=[Support(
-                        premises=[claim.id for claim in support],
+                support=[Support(
+                        premises=[claim.id for claim in sup],
                         sources=[source]
-                    ) for support in supports],
+                    ) for sup in support],
                 sources=[source]
             )
 
@@ -93,5 +93,5 @@ class Claim(BaseModel):
         """
         with open(file_name, mode=mode) as file:
             for claim in claims:
-                file.write(claim.model_dump_json())
+                file.write(claim.model_dump_json(exclude_none=True))
                 file.write("\n")

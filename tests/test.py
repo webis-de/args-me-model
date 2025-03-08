@@ -21,7 +21,7 @@ class TestParsing(unittest.TestCase):
         self.assertEqual("foo", claim.text)
         self.assertEqual(1, len(claim.sources))
         self.assertEqual(source, claim.sources[0])
-        self.assertEqual(0, len(claim.supports))
+        self.assertEqual(0, len(claim.support))
         self.assertEqual(
             claim,
             Claim.model_validate_json(claim.model_dump_json())
@@ -44,7 +44,7 @@ class TestParsing(unittest.TestCase):
         self.assertEqual("foo", claim.text)
         self.assertEqual(1, len(claim.sources))
         self.assertEqual(source, claim.sources[0])
-        self.assertEqual(2, len(claim.supports))
+        self.assertEqual(2, len(claim.support))
         self.assertEqual(
             claim,
             Claim.model_validate_json(claim.model_dump_json())
