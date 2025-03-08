@@ -1,2 +1,2 @@
-  { "id": "S0000C0000000000000000", "text": "Example text of the claim", "sources": [ { "name": "imagination", "text": "Original text as in the source" } ] }
-{ "id": "S0000C0000000000000000", "text": "Example text of the claim", "sources": [ { "name": "imagination", "text": "Original text as in the source" } ] }
+  { "id": "S0000C0000000000000001", "text": "Example text of the claim", "sources": [ { "name": "imagination", "text": "Original text as in the source" } ] }
+{ "id": "S0000C0000000000000002", "text": "Example alternate text of the claim", "sources": [ { "name": "imagination", "text": "Original text as in the source" } ] }

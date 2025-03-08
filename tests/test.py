@@ -1,4 +1,5 @@
 import unittest
+import os
 
 from args_me_model import Claim, Source
 
@@ -61,15 +62,27 @@ class TestParsing(unittest.TestCase):
 
     def test_read_examples_minimal(self):
         source = Source(name="imagination", text="Original text as in the source")
-        claim = Claim(
-            id="S0000C0000000000000000",
+        claim1 = Claim(
+            id="S0000C0000000000000001",
             text="Example text of the claim",
+            sources=[source]
+          )
+        claim2 = Claim(
+            id="S0000C0000000000000002",
+            text="Example alternate text of the claim",
             sources=[source]
           )
         parsed = list(Claim.read_ndjson("tests/example-minimal.ndjson"))
         self.assertEqual(2, len(parsed))
-        self.assertEqual(claim, parsed[0])
-        self.assertEqual(claim, parsed[1])
+        self.assertEqual(claim1, parsed[0])
+        self.assertEqual(claim2, parsed[1])
+
+    def test_read_write_examples_minimal(self):
+        parsed = list(Claim.read_ndjson("tests/example-minimal.ndjson"))
+        Claim.write_ndjson(parsed, "tests/tmp.ndjson")
+        parsed2 = list(Claim.read_ndjson("tests/tmp.ndjson"))
+        self.assertEqual(parsed, parsed2)
+        os.remove("tests/tmp.ndjson")
 
 
 if __name__ == '__main__':

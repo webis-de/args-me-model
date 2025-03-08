@@ -70,3 +70,13 @@ class Claim(BaseModel):
                 trimmed_line = line.strip()
                 if trimmed_line != "":
                     yield Claim.model_validate_json(trimmed_line)
+
+    @staticmethod
+    def write_ndjson(
+            claims: Iterator['Claim'],
+            file_name: str,
+            mode: Annotated[str, Field(pattern=r"[awx]")]="w"):
+        with open(file_name, mode=mode) as file:
+            for claim in claims:
+                file.write(claim.model_dump_json())
+                file.write("\n")
