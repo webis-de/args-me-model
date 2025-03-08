@@ -1,6 +1,12 @@
 # args-me-model
 Data model for args.me.
 
+## Install
+```shell
+pip install args-me-model
+```
+
+## Quickstart
 ```python
 from args_me_model import Claim, Source
 
