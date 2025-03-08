@@ -82,7 +82,7 @@ class Claim(BaseModel):
     def write_ndjson(
             claims: Iterator['Claim'],
             file_name: str,
-            mode: Annotated[str, Field(pattern=r"[awx]")]="w"):
+            mode: Annotated[str, Field(pattern=r"[awx]")] = "w"):
         """
         Read claims from a Newline Delimited JSON file.
 
