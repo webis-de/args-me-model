@@ -1,5 +1,5 @@
 from typing import Annotated, List
-from pydantic import BaseModel, Field, model_validator 
+from pydantic import BaseModel, Field, model_validator
 
 from .claim_id import claim_id_pattern
 from .argument import Argument
@@ -19,7 +19,7 @@ class Claim(BaseModel):
         )
     arguments: List[Argument] = Field(
             default=[],
-            description="Arguments that support this claim" 
+            description="Arguments that support this claim"
         )
     sources: List[Source] = Field(
             description="Sources for this claim",
