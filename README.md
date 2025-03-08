@@ -30,8 +30,8 @@ claim3 = Claim.from_source(
             text="The sky is not blue"
         )
     )
-claim1.counter = claim3.id
-claim3.counter = claim1.id
+claim2.counter = claim3.id
+claim3.counter = claim2.id
 
 # Writing claims to a file
 Claim.write_ndjson([claim1, claim2, claim3], "myclaim.ndjson")
