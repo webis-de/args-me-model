@@ -11,9 +11,6 @@ def _str_hash(string: str, length: int) -> str:
     return hashlib.sha1(string.encode("utf-8")).hexdigest()[0:length]
 
 
-_hash_cache = {}
-
-
 def hash_claim_id(source_name: str, text: str) -> str:
     """
     Generates an ID from the claim source's name and the claim's text.
