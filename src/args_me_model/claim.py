@@ -1,4 +1,4 @@
-from typing import Annotated, Iterator, List
+from typing import Annotated, Iterator, List, Optional
 from pydantic import BaseModel, Field, FilePath, model_validator
 
 from .claim_id import claim_id_pattern, hash_claim_id
@@ -40,12 +40,16 @@ class Claim(BaseModel):
     def from_source(
             cls,
             source: Source,
-            support: List[List['Claim']] = []) -> 'Claim':
+            counter: Optional['Claim'] = None,
+            support: List[List['Claim']] = []
+        ) -> 'Claim':
         """
         Derive a claim object directly from the source, copying its text.
 
         :param cls: the class object
         :param Source source: the source object from which the claim should be derived
+        :param counter: the (single) counter claim to the claim
+        :type counter: Claim or None
         :param support: a list of linked supports from the same source; each list of
         claims within the list corresponds to one linked support relation
         :type support: list[list[Claim]]
@@ -53,15 +57,19 @@ class Claim(BaseModel):
         :rtype: Claim
         :raises ValueError: if the source contains no 'text'
         """
-        return cls(
+        claim = cls(
                 id=hash_claim_id(source.name, source.text),
                 text=source.text,
+                counter=counter.id if counter is not None else None,
                 support=[Support(
                         premises=[claim.id for claim in sup],
                         sources=[source]
                     ) for sup in support],
                 sources=[source]
             )
+        if counter is not None:
+            counter.counter = claim.id
+        return claim
 
     @staticmethod
     def read_ndjson(file_name: FilePath) -> Iterator['Claim']:

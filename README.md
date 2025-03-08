@@ -28,10 +28,9 @@ claim3 = Claim.from_source(
         Source(
             name="uncommon-knowledge",
             text="The sky is not blue"
-        )
+        ),
+        counter = claim2 # mark claim2 and claim3 as counter claims
     )
-claim2.counter = claim3.id
-claim3.counter = claim2.id
 
 # Writing claims to a file
 Claim.write_ndjson([claim1, claim2, claim3], "myclaim.ndjson")

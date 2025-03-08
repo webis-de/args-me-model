@@ -31,7 +31,7 @@ class TestParsing(unittest.TestCase):
         source = Source(name="test", text="foo")
         claim = Claim.from_source(
             source,
-            [
+            support=[
                 [
                     Claim.from_source(Source(name="test", text="one")),
                     Claim.from_source(Source(name="test", text="two"))
