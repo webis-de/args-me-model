@@ -1,6 +1,7 @@
 import unittest
 
-from args_me_model import Argument, Claim, Source
+from args_me_model import Claim, Source
+
 
 class TestParsing(unittest.TestCase):
 
@@ -11,7 +12,5 @@ class TestParsing(unittest.TestCase):
         self.assertEqual(claim, Claim.model_validate_json(claim.model_dump_json()))
 
 
-
 if __name__ == '__main__':
     unittest.main()
-

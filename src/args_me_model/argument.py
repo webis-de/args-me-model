@@ -1,5 +1,5 @@
 from typing import Annotated, List
-from pydantic import BaseModel, Field, constr
+from pydantic import BaseModel, Field
 
 from .claim_id import claim_id_pattern
 from .source import Source
@@ -14,5 +14,3 @@ class Argument(BaseModel):
             description="Sources for this argument",
             min_length=1
         )
-
-
