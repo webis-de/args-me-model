@@ -1,5 +1,5 @@
 from typing import Annotated, Dict, Iterator, List, Optional
-from pydantic import BaseModel, Field, FilePath, JsonValue, model_validator
+from pydantic import BaseModel, Field, FilePath, JsonValue, field_validator
 
 from .claim_id import claim_id_pattern, hash_claim_id
 from .support import Support
@@ -33,12 +33,13 @@ class Claim(BaseModel):
             description="Further data on the claim"
         )
 
-    @model_validator(mode="after")
-    def _validate_sources(self):
-        for source in self.sources:
+    @field_validator('sources', mode="after")
+    @classmethod
+    def _validate_sources(cls, sources: List[Source]) -> List[Source]:
+        for source in sources:
             if not source.text:
                 raise ValueError("Sources for a claim must contain the 'text' attribute")
-        return self
+        return sources
 
     @classmethod
     def from_source(
@@ -55,7 +56,7 @@ class Claim(BaseModel):
         :param counter: the (single) counter claim to the claim
         :type counter: Claim or None
         :param support: a list of linked supports from the same source; each list of
-        claims within the list corresponds to one linked support relation
+            claims within the list corresponds to one linked support relation
         :type support: list[list[Claim]]
         :return: the claim object directly derived from the source
         :rtype: Claim
@@ -101,7 +102,7 @@ class Claim(BaseModel):
         :param iterator[Claim] claims: An iterator over the claims to write
         :param str file_name: The name of the file to write to
         :param str mode: The mode for writing to the file ("a" for appending),
-        defaults to "w"
+            defaults to "w"
         """
         with open(file_name, mode=mode) as file:
             for claim in claims:

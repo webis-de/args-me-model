@@ -52,3 +52,15 @@ for claim in Claim.read_ndjson("myclaim.ndjson"):
     print(claim.text)
 ```
 
+## Development
+Running unittests
+```shell
+PYTHONPATH=$PWD/src python3 -m unittest
+```
+
+Building documentation
+```shell
+cd docs
+pip install -r requirements
+sphinx-build -b html . _build
+```
