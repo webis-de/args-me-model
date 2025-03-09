@@ -46,7 +46,8 @@ class Claim(BaseModel):
                 cls,
                 source: Source,
                 counter: Optional['Claim'] = None,
-                support: List[List['Claim']] = []
+                support: List[List['Claim']] = [],
+                support_text: str | None = None,
             ) -> 'Claim':
         """
         Derive a claim object directly from the source, copying its text.
@@ -58,17 +59,22 @@ class Claim(BaseModel):
         :param support: a list of linked supports from the same source; each list of
             claims within the list corresponds to one linked support relation
         :type support: list[list[Claim]]
+        :param support_text: Text in the source that specificially shows the support
+            relation
+        :type support_text: str or None
         :return: the claim object directly derived from the source
         :rtype: Claim
         :raises ValueError: if the source contains no 'text'
         """
+        support_source = source.model_copy()
+        support_source.text = support_text
         claim = cls(
                 id=hash_claim_id(source.name, source.text),
                 text=source.text,
                 counter=counter.id if counter is not None else None,
                 support=[Support(
                         premises=[claim.id for claim in sup],
-                        sources=[source]
+                        sources=[support_source]
                     ) for sup in support],
                 sources=[source]
             )
@@ -106,5 +112,7 @@ class Claim(BaseModel):
         """
         with open(file_name, mode=mode) as file:
             for claim in claims:
-                file.write(claim.model_dump_json(exclude_none=True))
+                file.write(claim.model_dump_json(
+                        exclude_defaults=True)
+                    )
                 file.write("\n")

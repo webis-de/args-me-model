@@ -24,32 +24,29 @@ pip install args-me-model
 from args_me_model import Claim, Source
 
 # Creating claims
-claim1 = Claim.from_source(
-        Source(
-            name="common-knowledge",
-            text="Blue is scattered more than other colors"
-        )
+premise1 = Claim.from_source(
+        Source(name="common-knowledge", text="There are no clouds")
     )
-claim2 = Claim.from_source(
-        Source(
-            name="common-knowledge",
-            text="The sky is blue"
-        ),
-        support = [[claim1]] # list of linked support
+premise2 = Claim.from_source(
+        Source(name="common-knowledge", text="A clear sky is blue")
     )
-claim3 = Claim.from_source(
-        Source(
-            name="uncommon-knowledge",
-            text="The sky is not blue"
-        ),
-        counter = claim2 # claim2 and claim3 are counter claims
+claim = Claim.from_source(
+        Source(name="common-knowledge", text="The sky is blue"),
+        support = [[premise1, premise2]] # linked support relations
+    )
+counterclaim = Claim.from_source(
+        Source(name="uncommon-knowledge", text="The sky is not blue"),
+        counter = claim # also sets claim.counter
     )
 
 # Writing claims to a file
-Claim.write_ndjson([claim1, claim2, claim3], "myclaim.ndjson")
+Claim.write_ndjson(
+        [premise1, premise2, claim, counterclaim],
+        "claims.ndjson"
+    )
 
 # Iterating over claims from a file
-for claim in Claim.read_ndjson("myclaim.ndjson"):
+for claim in Claim.read_ndjson("claims.ndjson"):
     print(claim.text)
 ```
 
