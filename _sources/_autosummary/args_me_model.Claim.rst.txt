@@ -1,0 +1,6 @@
+﻿args\_me\_model.Claim
+=====================
+
+.. currentmodule:: args_me_model
+
+.. autopydantic_model:: Claim

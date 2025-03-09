@@ -1,0 +1,6 @@
+﻿args\_me\_model.Support
+=======================
+
+.. currentmodule:: args_me_model
+
+.. autopydantic_model:: Support
