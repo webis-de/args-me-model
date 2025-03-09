@@ -15,7 +15,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
 html_theme = 'alabaster'
-html_static_path = ['_static']
 html_sidebars = {
     '**': [
         'about.html',
@@ -23,4 +22,14 @@ html_sidebars = {
     ]
 }
 
-sys.path.insert(0, str(Path('..', 'src').resolve()))
+src_path = Path('..', 'src').resolve()
+sys.path.insert(0, str(src_path))
+with open(str(src_path / "args_me_model" / "__init__.py")) as file:
+    for line in file:
+        if line.startswith("__version__"):
+            version = line.split('"')[1]
+
+rst_epilog = """
+.. _code: https://github.com/webis-de/args-me-model/tree/v{0}/"
+.. _package: https://pypi.org/project/args-me-model/{0}/"
+""".format(version)

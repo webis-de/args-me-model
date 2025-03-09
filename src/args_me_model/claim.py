@@ -97,7 +97,7 @@ class Claim(BaseModel):
             file_name: str,
             mode: Annotated[str, Field(pattern=r"[awx]")] = "w"):
         """
-        Read claims from a Newline Delimited JSON file.
+        Write claims to a Newline Delimited JSON file.
 
         :param iterator[Claim] claims: An iterator over the claims to write
         :param str file_name: The name of the file to write to

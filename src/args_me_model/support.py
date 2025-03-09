@@ -7,7 +7,8 @@ from .source import Source
 
 class Support(BaseModel):
     """
-    A list of premises (claims) that together support some conclusion (another claim).
+    A list of premises (claims) that, when taken together ("linked"), support
+    some conclusion (another claim).
     """
     premises: List[Annotated[str, Field(pattern=claim_id_pattern)]] = Field(
             description="IDs of the claims that provide linked support for the conclusion",
