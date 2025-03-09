@@ -43,11 +43,11 @@ class Claim(BaseModel):
 
     @classmethod
     def from_source(
-            cls,
-            source: Source,
-            counter: Optional['Claim'] = None,
-            support: List[List['Claim']] = []
-        ) -> 'Claim':
+                cls,
+                source: Source,
+                counter: Optional['Claim'] = None,
+                support: List[List['Claim']] = []
+            ) -> 'Claim':
         """
         Derive a claim object directly from the source, copying its text.
 
