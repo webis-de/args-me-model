@@ -6,13 +6,13 @@ project = 'args-me-model'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
+    'sphinx_mdinclude',
     'sphinxcontrib.autodoc_pydantic'
 ]
 
 autosummary_generate = True
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
 
 html_theme = 'alabaster'
 html_sidebars = {

@@ -19,9 +19,10 @@ dynamic = ["version", "readme", "dependencies"]
 
 
 [project.urls]
-"Homepage" = "https://github.com/webis-de/args-me-model"
-"Bug Reports" = "https://github.com/webis-de/args-me-model/issues"
+"Homepage" = "https://webis.de/args-me-model/"
+"Documentation" = "https://webis.de/args-me-model/"
 "Source" = "https://github.com/webis-de/args-me-model"
+"Issues" = "https://github.com/webis-de/args-me-model/issues"
 
 
 [tool.setuptools.dynamic]
