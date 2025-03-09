@@ -30,6 +30,6 @@ with open(str(src_path / "args_me_model" / "__init__.py")) as file:
             version = line.split('"')[1]
 
 rst_epilog = """
-.. _code: https://github.com/webis-de/args-me-model/tree/v{0}/"
-.. _package: https://pypi.org/project/args-me-model/{0}/"
+.. _code: https://github.com/webis-de/args-me-model/tree/v{0}/
+.. _package: https://pypi.org/project/args-me-model/{0}/
 """.format(version)
