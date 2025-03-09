@@ -1,7 +1,7 @@
 # args-me-model
 
 [![PyPI - Version](https://img.shields.io/pypi/v/args-me-model)](https://pypi.org/project/args-me-model/)
-![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fwebis-de%2Fargs-me-model%2Frefs%2Fheads%2Fmain%2Fpyproject.toml)
+[![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fwebis-de%2Fargs-me-model%2Frefs%2Fheads%2Fmain%2Fpyproject.toml)](https://webis.de/args-me-model)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/webis-de/args-me-model/test.yml)](https://github.com/webis-de/args-me-model/actions/workflows/test.yml)
 [![Static Badge](https://img.shields.io/badge/licence-MIT-%2395c30d)](https://github.com/webis-de/args-me-model/blob/main/LICENSE)
 
@@ -52,15 +52,16 @@ for claim in Claim.read_ndjson("myclaim.ndjson"):
     print(claim.text)
 ```
 
+More information in the [documentation](https://webis.de/args-me-model).
+
 ## Development
-Running unittests
+Running unittests (done automatically on push)
 ```shell
 PYTHONPATH=$PWD/src python3 -m unittest
 ```
 
-Building documentation
+Building documentation (done automatically on release)
 ```shell
-cd docs
-pip install -r requirements
-sphinx-build -b html . _build
+pip install -r docs/requirements
+sphinx-build -b html docs/ docs/_build
 ```
