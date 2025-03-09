@@ -1,5 +1,5 @@
-from typing import Annotated, Iterator, List, Optional
-from pydantic import BaseModel, Field, FilePath, model_validator
+from typing import Annotated, Dict, Iterator, List, Optional
+from pydantic import BaseModel, Field, FilePath, JsonValue, model_validator
 
 from .claim_id import claim_id_pattern, hash_claim_id
 from .support import Support
@@ -27,6 +27,10 @@ class Claim(BaseModel):
     sources: List[Source] = Field(
             description="Sources for this claim",
             min_length=1
+        )
+    annotations: Dict[str, JsonValue] = Field(
+            default={},
+            description="Further data on the claim"
         )
 
     @model_validator(mode="after")

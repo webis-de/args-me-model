@@ -1,5 +1,5 @@
-from typing import Annotated, List
-from pydantic import BaseModel, Field
+from typing import Annotated, Dict, List
+from pydantic import BaseModel, Field, JsonValue
 
 from .claim_id import claim_id_pattern
 from .source import Source
@@ -16,4 +16,8 @@ class Support(BaseModel):
     sources: List[Source] = Field(
             description="Sources for this support relation",
             min_length=1
+        )
+    annotations: Dict[str, JsonValue] = Field(
+            default={},
+            description="Further data on the support relation"
         )
